@@ -1,10 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, Column } from 'typeorm';
+import { TimeStampEntity } from '../common/entities/timestamp.entity';
 
 @Entity('users')
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends TimeStampEntity {
   @Column({
     nullable: true,
   })
