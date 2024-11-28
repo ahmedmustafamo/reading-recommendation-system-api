@@ -28,15 +28,9 @@ export class AuthService {
 
   // Generate a JWT token for the user
   async login(user: User) {
-    const payload: JwtPayload = { email: user.email, sub: user.id };
+    const payload: JwtPayload = { email: user.email, sub: user.id, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
     };
-  }
-
-  // Register a new user (using bcrypt to hash passwords)
-  async register(email: string, password: string, name: string, role: string): Promise<User> {
-    const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
-    return this.userService.createUser({ email, name, role, password: hashedPassword });
   }
 }
