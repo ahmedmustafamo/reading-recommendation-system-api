@@ -1,7 +1,5 @@
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './users/user.module';
 import { BookModule } from './books/book.module';
 import { ReadingModule } from './readings/reading.module';
@@ -20,8 +18,6 @@ import { LoggingMiddleware } from './common/middlewares/logging.middleware';
     ReadingModule,
     AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 
 export class AppModule implements NestModule {
