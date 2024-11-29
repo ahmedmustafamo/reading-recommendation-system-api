@@ -69,6 +69,28 @@ NODE_ENV=development
     http://localhost:3000
     ```
 
+## Running Unit Test Cases
+
+Before running the unit tests, make sure you have started the application using Docker Compose, as the tests may depend on the running services (e.g., database or other dependencies).
+
+1. **Ensure Docker Compose is running**:
+
+    Make sure you've started the application using:
+
+    ```bash
+    docker-compose up
+    ```
+
+2. **Run Unit Tests**:
+
+    Once the Docker Compose services are running, you can run the unit tests for the NestJS application with the following command:
+
+    ```bash
+    docker exec -it rrs-app npm run test
+    ```
+
+    This will execute the unit tests inside the running `rrs-app` container.
+
 ## File Structure
 
 - **`src/`**: Source code for the NestJS application.
