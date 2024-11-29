@@ -103,7 +103,7 @@ Before running the unit tests, make sure you have started the application using 
 This project includes the following services:
 
 - **rrs-app**: The NestJS application itself.
-- **rrs-db**: A PostgreSQL database (as an example). You can replace this with any other service depending on your app's requirements.
+- **rrs-db**: A PostgreSQL database.
 
 ## Stopping the Application
 
@@ -123,9 +123,3 @@ This will stop and remove the containers, networks, and volumes defined in the `
     ```bash
     docker-compose logs
     ```
-
-## Customization
-
-Feel free to customize the Dockerfile, `docker-compose.yml`, or `.env` to suit your project's requirements. For example, you can add more services such as Redis, MongoDB, etc., to the `docker-compose.yml` file.
-
-Let me know if you need anything else!
