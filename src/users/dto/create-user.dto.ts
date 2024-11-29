@@ -14,7 +14,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => ("" + value).toUpperCase())
+  @Transform(({ value }) => ("" + value).toLowerCase())
   @IsEnum(UserRole, { message: "role must be one of the following values: 'admin' or 'user'" })
   role: string;
 }
