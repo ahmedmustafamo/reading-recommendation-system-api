@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, ForbiddenException, Logger } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from '../types/JwtPayload';
@@ -11,6 +11,8 @@ export class RolesGuard implements CanActivate {
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {}
+
+  private readonly logger = new Logger(RolesGuard.name);
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const requiredRoles = this.reflector.get<string[]>('roles', context.getHandler());
@@ -36,7 +38,7 @@ export class RolesGuard implements CanActivate {
       const userRole = payload.role;
       return requiredRoles.includes(userRole);
     } catch (error) {
-      console.log(error)
+      this.logger.error(error)
       throw new ForbiddenException('Invalid or expired token');
     }
   }

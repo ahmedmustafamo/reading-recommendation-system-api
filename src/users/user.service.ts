@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException, OnModuleInit } from '@nestjs/common';
+import { Injectable, BadRequestException, OnModuleInit, Logger } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcryptjs';
@@ -15,6 +15,8 @@ export class UserService implements OnModuleInit {
     private readonly userRepository: Repository<User>,
     private readonly configService: ConfigService,
   ) { }
+
+  private readonly logger = new Logger(UserService.name);
 
   async onModuleInit() {
     await this.seedAdminUser();
@@ -36,9 +38,9 @@ export class UserService implements OnModuleInit {
         name: "Admin USer"
       }
       await this.createUser(adminUser);
-      console.log('Admin user created');
+      this.logger.log('Admin user created');
     } else {
-      console.log('Admin user already exists');
+      this.logger.log('Admin user already exists');
     }
   }
 
