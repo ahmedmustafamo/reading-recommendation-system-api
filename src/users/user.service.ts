@@ -29,14 +29,13 @@ export class UserService implements OnModuleInit {
     const existingUser = await this.userRepository.findOne({ where: { email: adminEmail } });
 
     if (!existingUser) {
-      const hashedPassword = bcrypt.hashSync(adminPassword, 10);
-
       const adminUser: CreateUserDto = {
         email: adminEmail,
-        password: hashedPassword,
+        password: adminPassword,
         role: 'admin',
         name: "Admin USer"
       }
+
       await this.createUser(adminUser);
       this.logger.log('Admin user created');
     } else {
@@ -48,8 +47,9 @@ export class UserService implements OnModuleInit {
     const errors = await validate(createUserDto);
     if (errors.length > 0)
       throw new BadRequestException({ 'message': 'Validation failed', 'error': errors });
-
-    const user = this.userRepository.create(createUserDto);
+    
+    const hashedPassword = bcrypt.hashSync(createUserDto.password, 10);
+    const user = this.userRepository.create({...createUserDto, password: hashedPassword});
     return this.userRepository.save(user);
   }
 
