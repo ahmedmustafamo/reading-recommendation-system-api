@@ -51,6 +51,8 @@ NODE_ENV=development
 
 > Ensure you replace these values with the actual settings for your environment.
 
+**Note: ** you can use both `SUPER_ADMIN_EMAIL` and `SUPER_ADMIN_PASSWORD` as an admin account as this will be created once `UserService` is created.
+
 ## Docker Compose Setup
 
 1. Build and start the application:
